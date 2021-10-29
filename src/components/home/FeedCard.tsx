@@ -1,6 +1,7 @@
-import React from "react";
-import "./style.css";
-import { HeartOutline, HeartSharp, ChatbubbleOutline } from "react-ionicons";
+import React from 'react';
+import './style.css';
+import { HeartOutline, HeartSharp, ChatbubbleOutline } from 'react-ionicons';
+import FeedModal from '../feed/feedModal';
 
 interface FeedCardProps {
   url?: string;
@@ -28,6 +29,7 @@ export default function FeedCard({ url }: FeedCardProps) {
           </div>
         </div>
       </div>
+      <FeedModal />
     </div>
   );
 }

@@ -1,0 +1,58 @@
+.feed-modal .ant-modal-content {
+  @apply rounded-lg min-h-[300px] h-auto;
+}
+
+.feed-modal-close {
+  @apply absolute top-5 right-5 cursor-pointer;
+}
+
+.feed-modal .ant-modal-close {
+  display: none;
+}
+
+.feed-modal h1 {
+  @apply text-lg font-semibold mb-10;
+}
+
+.feed-modal-footer {
+  @apply flex items-center justify-between mt-10;
+}
+
+.feed-modal-footer button {
+  @apply rounded-lg;
+}
+
+/* Feed-Type */
+.feed-type-item {
+  @apply flex items-center justify-center w-[130px] h-[130px] mr-5 border border-gray-300 hover:border-primary rounded-lg cursor-pointer p-3;
+}
+
+.feed-type-item-active {
+  @apply border-2 border-primary;
+}
+
+/* Feed-Upload */
+.feed-upload-action {
+  @apply flex flex-col items-center justify-center;
+}
+
+.feed-upload-action img {
+  @apply w-[120px] h-[120px] mb-5;
+}
+
+.feed-upload-action h2 {
+  @apply font-normal text-lg mb-3 text-gray-600;
+}
+
+.feed-upload-action button {
+  @apply rounded-lg;
+}
+
+/* Feed-Overview */
+.feed-overview-image {
+  @apply h-[200px] mb-5;
+}
+
+.feed-overview-image img {
+  @apply w-full h-full object-contain;
+}

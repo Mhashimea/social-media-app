@@ -1,0 +1,31 @@
+.explore h1 {
+  @apply text-xl font-semibold mb-5;
+}
+
+.explore-users {
+  @apply max-w-[500px];
+}
+
+.explore-users-item {
+  @apply flex items-center mb-3 cursor-pointer px-2 py-1;
+}
+
+.explore-users-item:hover {
+  @apply bg-gray-200 rounded-md;
+}
+
+.explore-users-item-profile {
+  @apply ml-3 flex-1;
+}
+
+.explore-users-item-profile h2 {
+  @apply mb-0;
+}
+
+.explore-users-item-profile p {
+  @apply text-xs text-gray-500 mb-0;
+}
+
+.explore-users-item button {
+  @apply rounded-md;
+}

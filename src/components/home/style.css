@@ -1,5 +1,5 @@
 .feed-card {
-  @apply min-w-[320px] max-w-[320px] h-auto mb-3 mr-3;
+  @apply min-w-[320px]  h-auto mb-5 mr-3;
 }
 
 .feed-card-attatchment img {

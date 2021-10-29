@@ -4,7 +4,7 @@
 
 *,
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body,
@@ -18,6 +18,10 @@ html {
 
 a:hover {
   color: inherit !important;
+}
+
+.desc {
+  @apply text-gray-500 text-sm;
 }
 
 /* Antd config */

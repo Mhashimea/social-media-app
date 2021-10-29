@@ -1,31 +1,31 @@
-import React from "react";
-import Logo from "../../assets/images/sidebar-logo.png";
-import * as IonIcon from "react-ionicons";
-import { LogOutOutline } from "react-ionicons";
-import { Link } from "react-router-dom";
-import classNames from "classnames";
+import React from 'react';
+import Logo from '../../assets/images/sidebar-logo.png';
+import * as IonIcon from 'react-ionicons';
+import { LogOutOutline } from 'react-ionicons';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 export default function Sidebar() {
   const menus = [
     {
-      name: "Feed",
-      icon: "GridOutline",
-      url: "/home",
+      name: 'Feed',
+      icon: 'GridOutline',
+      url: '/home',
     },
     {
-      name: "Post",
-      icon: "AddCircleOutline",
-      url: "/add-post",
+      name: 'Explore',
+      icon: 'SearchOutline',
+      url: '/explore',
     },
     {
-      name: "Explore",
-      icon: "SearchOutline",
-      url: "/explore",
+      name: 'Profile',
+      icon: 'PersonOutline',
+      url: '/my-profile',
     },
     {
-      name: "Settings",
-      icon: "CogOutline",
-      url: "/settings",
+      name: 'Settings',
+      icon: 'CogOutline',
+      url: '/settings',
     },
   ];
   const pathName = window.location.pathname;
@@ -64,8 +64,8 @@ export default function Sidebar() {
           return (
             <Link
               className={classNames({
-                "sidebar-menus-item": true,
-                "router-active": pathName === menu.url,
+                'sidebar-menus-item': true,
+                'router-active': pathName === menu.url,
               })}
               to={menu.url}
               key={index}

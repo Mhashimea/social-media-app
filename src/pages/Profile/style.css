@@ -1,0 +1,51 @@
+.profile h1 {
+  @apply flex-1 text-xl font-semibold mb-5;
+}
+
+.profile-form {
+  @apply w-2/3;
+}
+
+.profile-form-avatar img {
+  @apply rounded-full w-[120px] h-[120px] mb-3;
+}
+
+.profile-form-avatar .ant-upload {
+  @apply !mb-5;
+}
+
+.profile-form-controls .ant-form-item {
+  @apply flex items-start justify-start w-full;
+}
+
+.profile-form-controls .ant-form-item {
+  @apply w-full;
+}
+
+.profile-form-controls .ant-form-item-label {
+  @apply text-left w-[20%];
+}
+
+.profile-form-controls .ant-form-item-label label {
+  @apply font-semibold;
+}
+
+.profile-form-controls .ant-form-item-control-input {
+  @apply w-[300px];
+}
+
+.profile-form-desc {
+  @apply my-2 text-xs flex;
+}
+
+.profile-form-desc p {
+  @apply text-xs w-[80%];
+}
+
+.profile-form-actions {
+  @apply text-right w-full;
+}
+
+.profile-form-controls button {
+  @apply rounded-md;
+}
