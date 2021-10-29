@@ -1,0 +1,19 @@
+.home-header {
+  @apply flex items-center;
+}
+
+.home-header h1 {
+  @apply flex-1 text-xl font-semibold mb-0;
+}
+
+.home-header span {
+  @apply mr-3 text-gray-500 text-[13px];
+}
+
+.home-body {
+  @apply mt-3;
+}
+
+.my-masonry-grid {
+  @apply flex;
+}

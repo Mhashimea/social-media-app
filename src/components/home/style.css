@@ -1,0 +1,35 @@
+.feed-card {
+  @apply min-w-[320px] max-w-[320px] h-auto mb-3 mr-3;
+}
+
+.feed-card-attatchment img {
+  @apply w-full h-full rounded-xl;
+}
+
+.feed-card-controls {
+  @apply flex items-center mt-3;
+}
+
+.feed-card-profile {
+  @apply flex items-center flex-1;
+}
+
+.feed-card-profile img {
+  @apply w-[35px] h-[35px] rounded-full mr-2 border border-primary;
+}
+
+.feed-card-profile span {
+  @apply text-[13px] text-gray-800 font-semibold;
+}
+
+.feed-card-actions {
+  @apply flex items-center;
+}
+
+.feed-card-action-item {
+  @apply flex items-center;
+}
+
+.feed-card-action-item span {
+  @apply ml-2 font-semibold;
+}

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body,
+html {
+  @apply h-full w-full;
+}
+
+#root {
+  @apply h-full w-full;
+}
+
+a:hover {
+  color: inherit !important;
+}
+
+/* Antd config */
+.ant-form-item {
+  @apply !mb-[10px];
+}

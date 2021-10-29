@@ -1,0 +1,115 @@
+/* Sidebar */
+.sidebar {
+  @apply min-w-[250px] bg-[#f9f9f9] h-full flex flex-col;
+}
+
+.sidebar-brand {
+  @apply w-[120px] h-[100px];
+}
+
+.sidebar-brand img {
+  @apply w-full h-full object-cover;
+}
+
+.sidebar-profile-img {
+  @apply w-[80px] h-[80px] m-auto;
+}
+
+.sidebar-profile-img img {
+  @apply w-full h-full rounded-full border border-primary p-2;
+}
+
+.sidebar-profile h1 {
+  @apply text-center m-0 font-semibold;
+}
+
+.sidebar-profile p {
+  @apply text-gray-500 text-center;
+}
+
+.sidebar-statitics {
+  @apply flex items-center justify-center my-5;
+}
+
+.sidebar-statitics-item {
+  @apply flex-1 text-center;
+}
+
+.sidebar-statitics-item h1 {
+  @apply mb-0 font-semibold text-base;
+}
+
+.sidebar-statitics-item p {
+  @apply mb-0 text-xs text-gray-500;
+}
+
+.sidebar-menus {
+  @apply flex flex-col px-5 flex-1;
+}
+
+.sidebar-menus-item {
+  @apply mb-2  p-2 rounded-md text-gray-800 text-[13px] flex items-center cursor-pointer;
+}
+
+.sidebar-menus-item:hover {
+  @apply bg-[#ed4b5859];
+}
+
+.sidebar-menus-item-icon span svg {
+  @apply w-[20px] h-[20px] mr-3;
+}
+
+.sidebar-meus-item-name {
+  @apply text-[14px] font-medium;
+}
+
+.sidebar-logout {
+  @apply !flex !justify-end;
+}
+
+.router-active {
+  @apply bg-[#ed4b5859];
+}
+
+.router-active .sidebar-menus-item-icon span svg,
+.router-active .sidebar-meus-item-name {
+  color: #ed4b58;
+}
+
+/* Layout */
+.router-view {
+  @apply px-10 py-5 w-full overflow-hidden;
+}
+
+.router-view-body {
+  @apply mt-5 overflow-auto flex-1;
+}
+
+/* Navbar */
+.navbar {
+  @apply mb-3 flex items-center justify-center w-full;
+}
+
+.navbar-search {
+  @apply flex-1;
+}
+
+.navbar-search input {
+  @apply bg-[#eee] rounded-md border-none w-[200px];
+}
+
+.navbar-controls {
+  @apply flex items-center;
+}
+
+.navbar-control-icon {
+  @apply mr-5;
+}
+
+.navbar-controls button {
+  @apply flex items-center rounded-md;
+}
+
+.navbar-controls button span {
+  @apply mr-1;
+}

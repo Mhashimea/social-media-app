@@ -1,0 +1,27 @@
+.auth {
+  @apply bg-[#eee] h-full w-full flex items-center justify-center flex-col;
+}
+
+.auth-card {
+  @apply max-w-[350px] w-full  bg-white rounded-md border border-gray-300;
+}
+
+.auth-card-header {
+  @apply mb-8;
+}
+
+.auth-card-logo {
+  @apply w-[200px] m-auto h-[100px];
+}
+
+.auth-card-logo img {
+  @apply w-full h-full object-cover;
+}
+
+.auth-card-body {
+  @apply p-3;
+}
+
+.login-form {
+  @apply min-h-[350px] mb-3;
+}
