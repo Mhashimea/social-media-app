@@ -10,6 +10,7 @@ const {
   updateProfile,
 } = require('./api/user');
 const { signup, signin, me } = require('./api/auth');
+const { getAllFeed, addFeed } = require('./api/feed');
 
 app.use(cors());
 
@@ -17,6 +18,9 @@ app.get('/users', getAllUsers);
 app.get('/userById', firebaseAuth, getUserById);
 app.post('/update-user', updateUser);
 app.post('/upload-avatar', updateProfile);
+
+app.get('/feeds', getAllFeed);
+app.post('/add-feed', firebaseAuth, addFeed);
 
 app.post('/signup', signup);
 app.post('/signin', signin);

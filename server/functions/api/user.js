@@ -7,7 +7,7 @@ exports.getAllUsers = (req, res) => {
     .get()
     .then((data) => {
       data.forEach((doc) => {
-        users.push(doc);
+        users.push(doc.data());
       });
       return res.json(users);
     })
