@@ -24,6 +24,6 @@ app.post('/add-feed', firebaseAuth, addFeed);
 
 app.post('/signup', signup);
 app.post('/signin', signin);
-app.get('/me', me);
+app.get('/me', firebaseAuth, me);
 
 exports.api = functions.region('europe-west1').https.onRequest(app);

@@ -6,6 +6,7 @@ const {
   signInWithEmailAndPassword,
 } = require('firebase/auth');
 const { config } = require('../util/config');
+const { currentUserId } = require('../util/common');
 
 initializeApp(config);
 
@@ -48,20 +49,22 @@ exports.signin = (req, res) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      res.status(200).json({ data: user });
+      res.status(200).json({ success: true, data: user });
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      res.status(500).json({ data: errorMessage });
+      res.status(500).json({ error: error.message });
     });
 };
 
-exports.me = (req, res) => {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (user !== null) {
-    res.status(200).json({ success: true, data: user });
+exports.me = async (req, res) => {
+  const { userId } = await currentUserId(req, res);
+  if (userId !== null) {
+    let docRef = db.collection('users').where('uid', '==', userId);
+    docRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        res.status(200).json({ success: true, data: doc.data() });
+      });
+    });
   } else {
     res.status(500).json({ success: true, data: 'User not logedin' });
   }

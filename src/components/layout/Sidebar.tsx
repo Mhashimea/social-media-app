@@ -4,8 +4,11 @@ import * as IonIcon from 'react-ionicons';
 import { LogOutOutline } from 'react-ionicons';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 export default function Sidebar() {
+  const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const menus = [
     {
       name: 'Feed',
@@ -29,6 +32,12 @@ export default function Sidebar() {
     },
   ];
   const pathName = window.location.pathname;
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAuth');
+    window.location.href = '/';
+  };
   return (
     <div className="sidebar">
       <div className="sidebar-brand">
@@ -37,10 +46,10 @@ export default function Sidebar() {
 
       <div className="sidebar-profile">
         <div className="sidebar-profile-img">
-          <img src="https://i.pravatar.cc/150?img=8" alt="" />
+          <img src={currentUser.avatar} alt="" />
         </div>
-        <h1>John Doe</h1>
-        <p>johndoe@yopmail.com</p>
+        <h1>{currentUser.displayName}</h1>
+        <p>{currentUser.email}</p>
       </div>
 
       <div className="sidebar-statitics">
@@ -77,7 +86,7 @@ export default function Sidebar() {
         })}
       </div>
 
-      <div className="sidebar-logout sidebar-menus">
+      <div className="sidebar-logout sidebar-menus" onClick={logout}>
         <div className="sidebar-menus-item">
           <div className="sidebar-menus-item-icon">
             <LogOutOutline />

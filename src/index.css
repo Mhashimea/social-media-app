@@ -24,6 +24,18 @@ a:hover {
   @apply text-gray-500 text-sm;
 }
 
+.loader-gif {
+  @apply h-[500px] flex items-center justify-center flex-col text-center;
+}
+
+.loader-gif-img {
+  @apply w-[80px] h-[80px];
+}
+
+.loader-gif-img img {
+  @apply w-full h-full;
+}
+
 /* Antd config */
 .ant-form-item {
   @apply !mb-[10px];

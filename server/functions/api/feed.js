@@ -25,7 +25,6 @@ exports.addFeed = async (req, res) => {
       `feed-${new Date()}`,
       req.body.attatchmentUrl
     );
-    console.log('feedUrl', feedUrl);
   }
 
   const payload = {

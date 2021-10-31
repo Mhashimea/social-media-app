@@ -11,8 +11,8 @@ import Loader from './components/Loader';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 
-const isAuth = localStorage.getItem('isAuth');
-const token = localStorage.getItem('token');
+const isAuth = localStorage.getItem('isAuth') || null;
+const token = localStorage.getItem('token') || null;
 
 const Home = lazy(() => import('./pages/Home/index'));
 const Profile = lazy(() => import('./pages/Profile/index'));
