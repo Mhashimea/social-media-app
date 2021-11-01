@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChatbubbleOutline, HeartOutline } from 'react-ionicons';
-import './style.css';
 import ReactPlayer from 'react-player';
+import './style.css';
 
 interface FeedCardProps {
   url?: string;
   type: string;
+  firstName?: string;
+  lastName?: string;
+  avatar?: string;
 }
 
-export default function FeedCard({ url, type }: FeedCardProps) {
+export default function FeedCard({
+  url,
+  type,
+  firstName,
+  lastName,
+  avatar,
+}: FeedCardProps) {
   return (
     <div className="feed-card">
       <div className="feed-card-attatchment">
@@ -20,8 +29,9 @@ export default function FeedCard({ url, type }: FeedCardProps) {
       </div>
       <div className="feed-card-controls">
         <div className="feed-card-profile">
-          <img src="https://i.pravatar.cc/150?img=45" alt="" />
-          <span>Hashim Ea</span>
+          <img src={avatar} alt="" />
+          <span>{firstName}</span>
+          <span>{lastName}</span>
         </div>
         <div className="feed-card-actions">
           <div className="feed-card-action-item mr-5">

@@ -45,7 +45,15 @@ export default function Home() {
             columnClassName="my-masonry-grid_column"
           >
             {app.feeds.map((items: any) => {
-              return <FeedCard url={items.attatchmentUrl} type={items.type} />;
+              return (
+                <FeedCard
+                  url={items.attatchmentUrl}
+                  type={items.type}
+                  firstName={items.firstName}
+                  lastName={items.lastName}
+                  avatar={items.avatar}
+                />
+              );
             })}
           </Masonry>
         </div>

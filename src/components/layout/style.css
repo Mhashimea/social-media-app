@@ -78,7 +78,7 @@
 
 /* Layout */
 .router-view {
-  @apply px-10 py-5 w-full overflow-hidden;
+  @apply px-10 py-5 flex-1 overflow-auto;
 }
 
 .router-view-body {

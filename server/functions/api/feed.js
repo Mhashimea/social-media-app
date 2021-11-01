@@ -4,6 +4,7 @@ const { uploadAttatchment, currentUserId } = require('../util/common');
 exports.getAllFeed = async (req, res) => {
   let userIds = [];
   let feeds = [];
+  let returnData = [];
   const { userId } = await currentUserId(req, res);
 
   // Get the followings user data
@@ -19,17 +20,17 @@ exports.getAllFeed = async (req, res) => {
   });
 
   const data = await db.collection('feed').get();
-  data.forEach(async (doc) => {
-    if (userIds.includes(doc.data().userId)) {
-      // const userDetails = await getUserData(doc.data().userId);
-      feeds.push({
-        // ...userDetails[0],
-        ...doc.data(),
-      });
-    }
-  });
+  data.forEach((doc) => feeds.push(doc.data()));
 
-  return res.json({ success: true, data: feeds });
+  for (let i = 0; i < feeds.length; i++) {
+    let feed = feeds[i];
+    const userDetails = await getUserData(feed.userId);
+    if (userDetails && userDetails.length)
+      feed = { ...feed, ...userDetails[0] };
+    returnData.push(feed);
+  }
+
+  return res.json({ success: true, data: returnData });
 };
 
 exports.addFeed = async (req, res) => {
