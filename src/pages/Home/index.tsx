@@ -11,7 +11,6 @@ import './style.css';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const [feeds, setFeeds] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const app = useSelector((state: RootState) => state.connection);
 
@@ -20,7 +19,6 @@ export default function Home() {
     if (response.success) {
       dispatch(setFeedsData(response.data || []));
     }
-    console.log(app.feeds);
     setLoading(false);
   };
 

@@ -2,32 +2,34 @@ const { db } = require('../util/admin');
 const { uploadAttatchment, currentUserId } = require('../util/common');
 
 exports.getAllFeed = async (req, res) => {
-  let data = [];
+  let userIds = [];
   let feeds = [];
   const { userId } = await currentUserId(req, res);
+
+  // Get the followings user data
+  userIds.push(userId);
   let docRef = db
     .collection('followings')
     .where('userId', '==', userId)
     .where('status', '==', 1);
-  docRef.get().then((querySnapshot) => {
+  await docRef.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      data.push(doc.data());
+      userIds.push(doc.data().followingId);
     });
   });
 
-  console.log(data);
-
-  db.collection('feed')
-    .get()
-    .then((data) => {
-      data.forEach((doc) => {
-        feeds.push(doc.data());
+  const data = await db.collection('feed').get();
+  data.forEach(async (doc) => {
+    if (userIds.includes(doc.data().userId)) {
+      // const userDetails = await getUserData(doc.data().userId);
+      feeds.push({
+        // ...userDetails[0],
+        ...doc.data(),
       });
-      return res.json({ success: true, data: feeds });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.code });
-    });
+    }
+  });
+
+  return res.json({ success: true, data: feeds });
 };
 
 exports.addFeed = async (req, res) => {
@@ -57,4 +59,17 @@ exports.addFeed = async (req, res) => {
     .catch((err) => {
       res.status(500).json({ error: 'Internal Server Error' });
     });
+};
+
+const getUserData = async (userId) => {
+  let users = [];
+  let docRef = await db
+    .collection('users')
+    .limit(1)
+    .where('uid', '==', userId)
+    .get();
+  docRef.forEach((doc) => {
+    users.push(doc.data());
+  });
+  return users;
 };

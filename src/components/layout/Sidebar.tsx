@@ -1,20 +1,22 @@
+import classNames from 'classnames';
+import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import Logo from '../../assets/images/sidebar-logo.png';
 import * as IonIcon from 'react-ionicons';
 import { LogOutOutline } from 'react-ionicons';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { Link } from 'react-router-dom';
+import Logo from '../../assets/images/sidebar-logo.png';
 import { get } from '../../services/http-request';
-import _ from 'lodash';
-import { setFollowings, setFollowers } from '../../store/connection';
+import { RootState } from '../../store';
+import { setFollowers, setFollowings } from '../../store/connection';
 
 export default function Sidebar() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
+  const feeds = useSelector((state: RootState) => state.connection.feeds);
   const [followers, setFollower] = useState<any>([]);
   const [followings, setFollowingsList] = useState<any>([]);
+  const ownFeeds = feeds.filter((a) => a.userId === currentUser.uid) || [];
 
   const menus = [
     {
@@ -86,7 +88,7 @@ export default function Sidebar() {
 
       <div className="sidebar-statitics">
         <div className="sidebar-statitics-item">
-          <h1>55</h1>
+          <h1>{ownFeeds.length}</h1>
           <p>Posts</p>
         </div>
         <div className="sidebar-statitics-item">
