@@ -31,7 +31,7 @@ export default function Login() {
         <Form
           name="login"
           layout={'vertical'}
-          initialValues={{}}
+          initialValues={{ email: 'johndoe@yopmail.com', password: '123456' }}
           onFinish={onFinish}
           requiredMark={'optional'}
         >
