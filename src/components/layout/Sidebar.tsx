@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../../assets/images/sidebar-logo.png';
 import * as IonIcon from 'react-ionicons';
 import { LogOutOutline } from 'react-ionicons';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { get } from '../../services/http-request';
+import _ from 'lodash';
+import { setFollowings, setFollowers } from '../../store/connection';
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
+  const [followers, setFollower] = useState<any>([]);
+  const [followings, setFollowingsList] = useState<any>([]);
+
   const menus = [
     {
       name: 'Feed',
@@ -38,6 +45,31 @@ export default function Sidebar() {
     localStorage.removeItem('isAuth');
     window.location.href = '/';
   };
+
+  const getFollowers = async () => {
+    const response = await get('get-followers');
+    if (response.success) {
+      setFollower(_.get(response, 'data', []).map((a) => a.followingId));
+      dispatch(setFollowings(_.get(response, 'data', [])));
+    }
+  };
+
+  const getFollowings = async () => {
+    const response = await get('get-followings');
+    if (response.success) {
+      setFollowingsList(_.get(response, 'data', []).map((a) => a.followingId));
+      dispatch(setFollowers(_.get(response, 'data', [])));
+    }
+  };
+
+  useEffect(() => {
+    const callFunc = async () => {
+      await getFollowings();
+      await getFollowers();
+    };
+    callFunc();
+  }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebar-brand">
@@ -58,11 +90,11 @@ export default function Sidebar() {
           <p>Posts</p>
         </div>
         <div className="sidebar-statitics-item">
-          <h1>26</h1>
+          <h1>{followings.length || 0}</h1>
           <p>Followers</p>
         </div>
         <div className="sidebar-statitics-item">
-          <h1>14</h1>
+          <h1>{followers.length || 0}</h1>
           <p>Following</p>
         </div>
       </div>

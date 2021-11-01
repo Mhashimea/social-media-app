@@ -10,7 +10,7 @@ exports.getAllUsers = (req, res) => {
       data.forEach((doc) => {
         users.push(doc.data());
       });
-      return res.json(users);
+      return res.json({ success: true, data: users });
     })
     .catch((err) => {
       console.error(err);

@@ -24,8 +24,13 @@ a:hover {
   @apply text-gray-500 text-sm;
 }
 
-.loader-gif {
-  @apply h-[500px] flex items-center justify-center flex-col text-center;
+.loader-gif,
+.no-data {
+  @apply h-[600px] flex items-center justify-center flex-col text-center;
+}
+
+.no-data-img {
+  @apply w-[180px] h-[180px];
 }
 
 .loader-gif-img {

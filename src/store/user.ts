@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface AppState {
+export interface UserState {
   currentUser: any
 }
 
-const initialState: AppState = {
+const initialState: UserState = {
   currentUser: {}
 }
 

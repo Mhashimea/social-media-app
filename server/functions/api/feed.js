@@ -1,15 +1,29 @@
 const { db } = require('../util/admin');
 const { uploadAttatchment, currentUserId } = require('../util/common');
 
-exports.getAllFeed = (req, res) => {
+exports.getAllFeed = async (req, res) => {
+  let data = [];
   let feeds = [];
+  const { userId } = await currentUserId(req, res);
+  let docRef = db
+    .collection('followings')
+    .where('userId', '==', userId)
+    .where('status', '==', 1);
+  docRef.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      data.push(doc.data());
+    });
+  });
+
+  console.log(data);
+
   db.collection('feed')
     .get()
     .then((data) => {
       data.forEach((doc) => {
         feeds.push(doc.data());
       });
-      return res.json(feeds);
+      return res.json({ success: true, data: feeds });
     })
     .catch((err) => {
       res.status(500).json({ error: err.code });
@@ -29,10 +43,10 @@ exports.addFeed = async (req, res) => {
 
   const payload = {
     attatchmentUrl: feedUrl,
-    description: req.body.description,
     status: true,
     userId: userId,
     createdAt: new Date(),
+    type: req.body.type,
   };
 
   db.collection('feed')

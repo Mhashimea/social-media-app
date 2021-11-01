@@ -28,7 +28,7 @@
 }
 
 .feed-type-item-active {
-  @apply border-2 border-primary;
+  @apply border-4 border-primary;
 }
 
 /* Feed-Upload */
@@ -48,11 +48,16 @@
   @apply rounded-lg;
 }
 
+.uploaded-preview {
+  @apply w-[250px] h-[250px] m-auto;
+}
+
 /* Feed-Overview */
 .feed-overview-image {
   @apply h-[200px] mb-5;
 }
 
-.feed-overview-image img {
+.feed-overview-image img,
+video {
   @apply w-full h-full object-contain;
 }

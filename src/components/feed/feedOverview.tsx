@@ -1,22 +1,40 @@
 import { Button, Input } from 'antd';
 import React from 'react';
 
-export default function FeedOverview() {
+interface FeedOverviewInterface {
+  onNext?: () => void;
+  onBack: () => void;
+  attatchmentUrl?: string;
+  loading?: boolean;
+  type: string;
+}
+
+export default function FeedOverview({
+  onNext,
+  onBack,
+  attatchmentUrl,
+  loading,
+  type,
+}: FeedOverviewInterface) {
   return (
     <div className="feed-overview">
       <div className="feed-overview-image">
-        <img
-          src="https://images.pexels.com/photos/9849841/pexels-photo-9849841.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-          alt=""
-        />
+        {type === 'image' ? (
+          <img src={attatchmentUrl} alt="" />
+        ) : (
+          <video src={attatchmentUrl} autoPlay className="mb-3" />
+        )}
       </div>
-      <div className="feed-overview-actions">
-        <Input.TextArea placeholder="Description" />
-      </div>
-
       <div className="feed-modal-footer">
-        <Button>Back</Button>
-        <Button type="primary">Post Feed</Button>
+        <Button onClick={onBack}>Back</Button>
+        <Button
+          type="primary"
+          onClick={onNext}
+          loading={loading}
+          disabled={loading}
+        >
+          Post Feed
+        </Button>
       </div>
     </div>
   );

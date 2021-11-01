@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import appReducer from './app'
 import userReducer from './user'
+import connectionReducer from './connection'
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    user: userReducer
+    user: userReducer,
+    connection: connectionReducer
   }
 })
 

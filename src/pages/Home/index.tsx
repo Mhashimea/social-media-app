@@ -1,29 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
+import { useDispatch, useSelector } from 'react-redux';
 import FeedCard from '../../components/home/FeedCard';
+import Loader from '../../components/Loader';
+import NoData from '../../components/NoData';
+import { get } from '../../services/http-request';
+import { RootState } from '../../store';
+import { setFeedsData } from '../../store/connection';
 import './style.css';
 
 export default function Home() {
-  const feeds = [
-    {
-      url: 'https://images.pexels.com/photos/9849841/pexels-photo-9849841.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-    },
-    {
-      url: 'https://images.pexels.com/photos/9714546/pexels-photo-9714546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    },
-    {
-      url: 'https://images.pexels.com/photos/2792670/pexels-photo-2792670.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-    },
-    {
-      url: 'https://images.pexels.com/photos/9849841/pexels-photo-9849841.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-    },
-    {
-      url: 'https://images.pexels.com/photos/9714546/pexels-photo-9714546.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    },
-    {
-      url: 'https://images.pexels.com/photos/2792670/pexels-photo-2792670.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-    },
-  ];
+  const dispatch = useDispatch();
+  const [feeds, setFeeds] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  const app = useSelector((state: RootState) => state.connection);
+
+  const getFeeds = async () => {
+    const response = await get('feeds');
+    if (response.success) {
+      dispatch(setFeedsData(response.data || []));
+    }
+    console.log(app.feeds);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getFeeds();
+  }, []);
+
   return (
     <div className="home">
       <div className="home-header">
@@ -33,17 +37,21 @@ export default function Home() {
           <span>Popular</span>
         </div>
       </div>
-      <div className="home-body">
-        <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {feeds.map((items) => {
-            return <FeedCard url={items.url} />;
-          })}
-        </Masonry>
-      </div>
+      {app.feeds.length === 0 && !loading && <NoData />}
+      {loading && <Loader />}
+      {app.feeds.length > 0 && (
+        <div className="home-body">
+          <Masonry
+            breakpointCols={3}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {app.feeds.map((items: any) => {
+              return <FeedCard url={items.attatchmentUrl} type={items.type} />;
+            })}
+          </Masonry>
+        </div>
+      )}
     </div>
   );
 }

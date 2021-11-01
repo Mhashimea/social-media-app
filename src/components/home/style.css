@@ -2,7 +2,8 @@
   @apply min-w-[320px]  h-auto mb-5 mr-3;
 }
 
-.feed-card-attatchment img {
+.feed-card-attatchment img,
+video {
   @apply w-full h-full rounded-xl;
 }
 

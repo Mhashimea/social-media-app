@@ -11,6 +11,12 @@ const {
 } = require('./api/user');
 const { signup, signin, me } = require('./api/auth');
 const { getAllFeed, addFeed } = require('./api/feed');
+const {
+  addToFollowList,
+  getFollowersList,
+  removeFollowers,
+  getFollowingsList,
+} = require('./api/connection');
 
 app.use(cors());
 
@@ -21,6 +27,10 @@ app.post('/upload-avatar', updateProfile);
 
 app.get('/feeds', getAllFeed);
 app.post('/add-feed', firebaseAuth, addFeed);
+app.post('/add-follower', addToFollowList);
+app.get('/get-followers', getFollowersList);
+app.get('/get-followings', getFollowingsList);
+app.post('/remove-follower', removeFollowers);
 
 app.post('/signup', signup);
 app.post('/signin', signin);

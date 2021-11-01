@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ChatbubbleOutline, HeartOutline } from 'react-ionicons';
 import './style.css';
-import { HeartOutline, HeartSharp, ChatbubbleOutline } from 'react-ionicons';
-import FeedModal from '../feed/feedModal';
+import ReactPlayer from 'react-player';
 
 interface FeedCardProps {
   url?: string;
+  type: string;
 }
 
-export default function FeedCard({ url }: FeedCardProps) {
+export default function FeedCard({ url, type }: FeedCardProps) {
   return (
     <div className="feed-card">
       <div className="feed-card-attatchment">
-        <img src={url} alt="" />
+        {type === 'image' ? (
+          <img src={url} alt="" />
+        ) : (
+          <ReactPlayer url={url} width={'100%'} height={'100%'} playing muted />
+        )}
       </div>
       <div className="feed-card-controls">
         <div className="feed-card-profile">
@@ -29,7 +34,6 @@ export default function FeedCard({ url }: FeedCardProps) {
           </div>
         </div>
       </div>
-      <FeedModal />
     </div>
   );
 }

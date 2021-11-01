@@ -1,7 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilerobotImageEditor from 'filerobot-image-editor';
+import { Button } from 'antd';
 
-export default function FeedImageEditor() {
+interface FeedImageEditorInterface {
+  onNext?: () => void;
+  onBack: () => void;
+  defaultValue?: string;
+  onDoneEdit?: (value) => void;
+}
+
+export default function FeedImageEditor({
+  onNext,
+  onBack,
+  defaultValue,
+  onDoneEdit,
+}: FeedImageEditorInterface) {
+  const [src, setSrc] = useState<any>('');
   const config = {
     tools: ['adjust', 'effects', 'filters', 'rotate'],
     reduceBeforeEdit: {
@@ -22,23 +36,36 @@ export default function FeedImageEditor() {
     },
   };
 
-  const [src, setSrc] = useState(
-    'https://images.pexels.com/photos/9849841/pexels-photo-9849841.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'
-  );
   const shortenTheBase64 = async (e) => {
     const src = e.canvas.toDataURL('image/png');
     setSrc(src);
+    if (onDoneEdit) {
+      onDoneEdit(src);
+      return;
+    }
   };
+
+  useEffect(() => {
+    if (defaultValue) setSrc(defaultValue);
+  }, []);
+
   return (
     <div className="feed-image-editor">
-      <FilerobotImageEditor
-        show={true}
-        src={src}
-        config={config}
-        onComplete={(e) => {
-          shortenTheBase64(e);
-        }}
-      />
+      {src && (
+        <FilerobotImageEditor
+          show={true}
+          src={src}
+          config={config}
+          onComplete={(e) => {
+            shortenTheBase64(e);
+          }}
+        />
+      )}
+
+      <div className="feed-modal-footer">
+        <Button onClick={() => (onBack ? onBack() : null)}>Back</Button>
+        <Button onClick={() => (onNext ? onNext() : null)}>Next</Button>
+      </div>
     </div>
   );
 }
